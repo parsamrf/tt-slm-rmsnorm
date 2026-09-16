@@ -6,7 +6,7 @@ SIM ?= icarus
 WAVES ?= 1
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = project.v
+PROJECT_SOURCES = tt_um_slm_rmsnorm.v slm_rmsnorm.v slm_invsqrt.v slb_spi_bridge.v spi_reg.sv rising_edge_detector.sv falling_edge_detector.sv
 
 ifneq ($(GATES),yes)
 

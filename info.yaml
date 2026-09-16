@@ -1,23 +1,29 @@
 # Tiny Tapeout project information
 project:
-  title:        ""      # Project title
-  author:       ""      # Your name
+  title:        "SLM RMSNorm Accelerator Tile"      # Project title
+  author:       "AI-HDL design team"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  ""      # One line description of what your project does
+  description:  "Fixed-point RMSNorm/LayerNorm unit with exactly-rounded Q1.15 inverse square root, from an SLM inference SoC, over a 32-bit SPI register bridge"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     25000000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  tiles: "8x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_example"
+  top_module:  "tt_um_slm_rmsnorm"
 
   # List your project's source files here.
   # Source files must be in ./src and you must list each source file separately, one per line.
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
-    - "project.v"
+    - "tt_um_slm_rmsnorm.v"
+    - "slb_spi_bridge.v"
+    - "spi_reg.sv"
+    - "rising_edge_detector.sv"
+    - "falling_edge_detector.sv"
+    - "slm_rmsnorm.v"
+    - "slm_invsqrt.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
@@ -43,13 +49,13 @@ pinout:
   uo[7]: ""
 
   # Bidirectional pins
-  uio[0]: ""
+  uio[0]: "irq (out)"
   uio[1]: ""
   uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
+  uio[3]: "SPI MISO (out)"
+  uio[4]: "SPI CS_n (in)"
+  uio[5]: "SPI SCK (in)"
+  uio[6]: "SPI MOSI (in)"
   uio[7]: ""
 
 # Do not change!
